@@ -1,0 +1,123 @@
+.layout {
+  display: grid;
+  gap: 24px;
+  /* Room for the floating "Notes" button on mobile. */
+  padding-block: 8px 96px;
+}
+
+.main {
+  display: grid;
+  gap: 20px;
+  min-width: 0;
+  align-content: start;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.character {
+  flex: none;
+  width: 88px;
+}
+
+.section {
+  display: grid;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 12px;
+}
+
+.dimensions {
+  display: grid;
+  gap: 14px;
+  list-style: none;
+}
+
+.dimensions li {
+  display: grid;
+  gap: 4px;
+}
+
+.dimensions li + li {
+  padding-top: 14px;
+  border-top: 2px dashed var(--tint);
+}
+
+.stats {
+  display: grid;
+  gap: 18px;
+}
+
+.stats dt {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--muted);
+}
+
+.stats strong {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.fillers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  list-style: none;
+}
+
+.fillers li {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--tint);
+  font-weight: 600;
+}
+
+/* Talk-ratio bar: the filled part is the user's share. */
+.ratio {
+  height: 18px;
+  margin-block: 6px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--tint);
+}
+
+.ratio div {
+  height: 100%;
+  background: var(--accent);
+}
+
+.actions {
+  justify-content: flex-start;
+}
+
+.loading {
+  display: grid;
+  gap: 10px;
+  width: min(420px, 100%);
+}
+
+.loading div {
+  height: 18px;
+}
+
+@media (min-width: 900px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 360px;
+    align-items: start;
+    gap: 32px;
+    padding-bottom: 56px;
+  }
+}

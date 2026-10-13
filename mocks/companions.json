@@ -1,0 +1,369 @@
+[
+  {
+    "id": "interview",
+    "name": "Interview practice",
+    "blurb": "Rehearse a job interview for the role you want, out loud.",
+    "character": "interview",
+    "voiceId": "emma",
+    "notes": true,
+    "groups": [
+      {
+        "id": "type",
+        "label": "What kind of interview?",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "behavioral",
+            "label": "Behavioral"
+          },
+          {
+            "id": "technical",
+            "label": "Technical"
+          },
+          {
+            "id": "hr",
+            "label": "HR screen"
+          },
+          {
+            "id": "panel",
+            "label": "Panel"
+          }
+        ]
+      },
+      {
+        "id": "style",
+        "label": "Interviewer style",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "friendly",
+            "label": "Friendly"
+          },
+          {
+            "id": "stern",
+            "label": "Stern"
+          },
+          {
+            "id": "rapid-fire",
+            "label": "Rapid-fire"
+          },
+          {
+            "id": "skeptical",
+            "label": "Skeptical"
+          }
+        ]
+      },
+      {
+        "id": "role",
+        "label": "Role you're interviewing for",
+        "type": "text",
+        "required": true,
+        "placeholder": "e.g. Junior data analyst",
+        "maxLength": 120
+      },
+      {
+        "id": "company",
+        "label": "Company (optional)",
+        "type": "text",
+        "placeholder": "e.g. Acme Bank",
+        "maxLength": 120
+      },
+      {
+        "id": "jobDescription",
+        "label": "Job description (optional)",
+        "type": "text",
+        "placeholder": "Paste the job ad here so the questions match it",
+        "maxLength": 2000,
+        "multiline": true
+      },
+      {
+        "id": "resume",
+        "label": "Your resume summary (optional)",
+        "type": "text",
+        "placeholder": "Paste a few lines about your experience and projects",
+        "maxLength": 2000,
+        "multiline": true
+      }
+    ]
+  },
+  {
+    "id": "case",
+    "name": "Case interview",
+    "blurb": "Crack a consulting-style business case step by step.",
+    "character": "case",
+    "voiceId": "michael",
+    "notes": true,
+    "groups": [
+      {
+        "id": "type",
+        "label": "Case type",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "market-sizing",
+            "label": "Market sizing"
+          },
+          {
+            "id": "profitability",
+            "label": "Profitability"
+          },
+          {
+            "id": "market-entry",
+            "label": "Market entry"
+          },
+          {
+            "id": "m-and-a",
+            "label": "Mergers & acquisitions"
+          }
+        ]
+      },
+      {
+        "id": "mode",
+        "label": "Who leads?",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "interviewer-led",
+            "label": "Interviewer leads"
+          },
+          {
+            "id": "candidate-led",
+            "label": "You lead"
+          }
+        ]
+      },
+      {
+        "id": "hints",
+        "label": "Hints",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "none",
+            "label": "No hints"
+          },
+          {
+            "id": "nudges",
+            "label": "Gentle nudges"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sales",
+    "name": "Sales pitch",
+    "blurb": "Pitch to a tough buyer and practise handling objections.",
+    "character": "sales",
+    "voiceId": "puck",
+    "notes": true,
+    "groups": [
+      {
+        "id": "buyer",
+        "label": "Who are you pitching to?",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "busy-exec",
+            "label": "Busy executive"
+          },
+          {
+            "id": "skeptic",
+            "label": "Skeptic"
+          },
+          {
+            "id": "price-focused",
+            "label": "Price-focused"
+          },
+          {
+            "id": "friendly-undecided",
+            "label": "Friendly but undecided"
+          }
+        ]
+      },
+      {
+        "id": "stage",
+        "label": "Where are you in the sale?",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "cold-call",
+            "label": "Cold call"
+          },
+          {
+            "id": "demo",
+            "label": "Product demo"
+          },
+          {
+            "id": "negotiation",
+            "label": "Negotiation"
+          },
+          {
+            "id": "closing",
+            "label": "Closing"
+          }
+        ]
+      },
+      {
+        "id": "product",
+        "label": "What are you selling?",
+        "type": "text",
+        "required": true,
+        "placeholder": "e.g. A scheduling app for small dental clinics",
+        "maxLength": 300
+      }
+    ]
+  },
+  {
+    "id": "presentation",
+    "name": "Presentation Q&A",
+    "blurb": "Face audience questions after your talk and stay composed.",
+    "character": "presentation",
+    "voiceId": "george",
+    "notes": true,
+    "groups": [
+      {
+        "id": "audience",
+        "label": "Your audience",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "friendly",
+            "label": "Friendly"
+          },
+          {
+            "id": "hostile",
+            "label": "Hostile"
+          },
+          {
+            "id": "technical",
+            "label": "Technical"
+          },
+          {
+            "id": "exec",
+            "label": "Executives"
+          }
+        ]
+      },
+      {
+        "id": "topic",
+        "label": "What is your presentation about?",
+        "type": "text",
+        "required": true,
+        "placeholder": "Give the topic, or paste a short summary of your talk",
+        "maxLength": 2000,
+        "multiline": true
+      }
+    ]
+  },
+  {
+    "id": "conversation",
+    "name": "Everyday conversation",
+    "blurb": "Get comfortable with small talk and keeping a chat going.",
+    "character": "conversation",
+    "voiceId": "heart",
+    "notes": true,
+    "groups": [
+      {
+        "id": "personality",
+        "label": "Their personality",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "curious",
+            "label": "Curious"
+          },
+          {
+            "id": "shy",
+            "label": "Shy"
+          },
+          {
+            "id": "opinionated",
+            "label": "Opinionated"
+          },
+          {
+            "id": "chatty",
+            "label": "Chatty"
+          }
+        ]
+      },
+      {
+        "id": "focus",
+        "label": "What do you want to practise?",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "follow-ups",
+            "label": "Asking follow-up questions"
+          },
+          {
+            "id": "active-listening",
+            "label": "Active listening"
+          },
+          {
+            "id": "small-talk",
+            "label": "Small talk"
+          },
+          {
+            "id": "awkward-silences",
+            "label": "Handling awkward silences"
+          },
+          {
+            "id": "talk-balance",
+            "label": "Balancing who talks"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "friend",
+    "name": "Friendly chat",
+    "blurb": "No goals and no grades. Just talk about whatever is on your mind.",
+    "character": "friend",
+    "voiceId": "bella",
+    "notes": false,
+    "groups": [
+      {
+        "id": "vibe",
+        "label": "Your friend's vibe",
+        "type": "single",
+        "required": true,
+        "choices": [
+          {
+            "id": "supportive",
+            "label": "Supportive"
+          },
+          {
+            "id": "playful",
+            "label": "Playful"
+          },
+          {
+            "id": "blunt",
+            "label": "Blunt"
+          },
+          {
+            "id": "chill",
+            "label": "Chill"
+          }
+        ]
+      },
+      {
+        "id": "topic",
+        "label": "Anything you want to talk about? (optional)",
+        "type": "text",
+        "placeholder": "e.g. My week, a show I'm watching, exam stress",
+        "maxLength": 200
+      }
+    ]
+  }
+]

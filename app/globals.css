@@ -1,0 +1,335 @@
+/* Design tokens. Warm light editorial: eggshell canvas, taupe surfaces, black ink, hairline borders, pill controls.
+   Colour lives in the product visuals (orbs), never in the interface chrome. Text pairs meet WCAG AA in both themes. */
+:root {
+  --bg: #fdfcfc;
+  --surface: #f5f3f1;
+  --text: #0a0a0a;
+  --muted: #6a645d;
+  --primary: #0a0a0a;
+  --primary-contrast: #fdfcfc;
+  --accent: #44403b;
+  --border: #e2ded8;
+  --radius: 20px;
+  --radius-lg: 24px;
+  --shadow: 0 0 1px rgba(0, 0, 0, 0.4), 0 1px 1px rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.04);
+  --danger: #b3261e;
+  --ok: #1d7448;
+  --warn: #875600;
+  --font-display: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body: var(--font-inter), system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --tint: #ebe8e4;
+  --wobble: var(--radius); /* legacy name still used by page modules */
+  --gutter: clamp(16px, 4vw, 40px);
+  color-scheme: light;
+}
+
+/* Light only, by the owner's choice (no dark theme). To add one later, redefine the tokens above under
+   @media (prefers-color-scheme: dark): every page reads its colours from these variables. */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  color: var(--text);
+  background: var(--bg);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  letter-spacing: 0.01em;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem);
+}
+
+h2 {
+  font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem);
+}
+
+h3 {
+  font-size: 1.125rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+
+a {
+  color: inherit;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+/* ---- Layout ---- */
+
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+.site-header {
+  padding-block: 16px;
+}
+
+/* A live session has its own thin top bar, so nothing competes with the orb. */
+body:has(main[data-session]) .site-header {
+  display: none !important; /* beats the inline layout style on the header */
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.125rem;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ---- Buttons ---- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 20px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: var(--shadow);
+  transition:
+    background-color 150ms ease-out,
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1),
+    opacity 150ms ease-out;
+}
+
+/* Hover styles only on devices that can really hover, so touch screens do not get stuck highlights. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    background: var(--tint);
+  }
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-contrast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-primary:hover {
+    background: var(--primary);
+    opacity: 0.86;
+  }
+}
+
+.btn-ghost {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-ghost:hover {
+    background: var(--tint);
+  }
+}
+
+.btn-danger {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: var(--primary-contrast);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-danger:hover {
+    background: var(--danger);
+    opacity: 0.88;
+  }
+}
+
+/* ---- Surfaces ---- */
+
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 24px;
+}
+
+/* A toggle chip: <button class="chip" aria-pressed>, or a <label class="chip"> wrapping a radio. */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  padding: 6px 16px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--bg);
+  color: var(--text);
+  font-weight: 500;
+  font-size: 0.9375rem;
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .chip:hover {
+    background: var(--tint);
+  }
+}
+
+.chip[aria-pressed="true"],
+.chip:has(input:checked) {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.chip:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+.banner {
+  padding: 12px 16px;
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent);
+  border-radius: 12px;
+  background: var(--surface);
+}
+
+.banner[data-tone="warn"] {
+  border-left-color: var(--warn);
+}
+
+.banner[data-tone="danger"] {
+  border-left-color: var(--danger);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* Loading placeholder. */
+.skeleton {
+  border-radius: 12px;
+  background: var(--tint);
+  animation: pulse 1.4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Qualitative level label (components/ui/LevelBadge). The text carries the meaning, colour is extra. */
+.level {
+  display: inline-flex;
+  padding: 2px 12px;
+  border: 1px solid currentColor;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  white-space: nowrap;
+  color: var(--accent);
+}
+
+.level[data-level="strong"] {
+  color: var(--ok);
+}
+
+.level[data-level="needs-work"] {
+  color: var(--warn);
+}
+
+/* Centred single-column page with a character on top (not-found, empty, goodbye states). */
+.stage {
+  display: grid;
+  justify-items: center;
+  gap: 16px;
+  padding-block: 32px 48px;
+  text-align: center;
+}
+
+.stage-character {
+  width: min(220px, 60vw);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}

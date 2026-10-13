@@ -1,0 +1,128 @@
+.layout {
+  display: grid;
+  gap: 24px;
+  padding-block: 8px 56px;
+}
+
+.intro {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 12px;
+  min-width: 0;
+  text-align: center;
+}
+
+.intro h1 {
+  font-size: clamp(1.75rem, 1.3rem + 1.6vw, 2.25rem);
+}
+
+.character {
+  width: min(200px, 55vw);
+  aspect-ratio: 1;
+  justify-self: center;
+}
+
+.formSkeleton {
+  height: 480px;
+}
+
+.form {
+  display: grid;
+  gap: 24px;
+  min-width: 0;
+}
+
+.group {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+  border: 0;
+}
+
+.label {
+  font-weight: 500;
+  font-size: 1rem;
+}
+
+.star {
+  color: var(--danger);
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--bg);
+}
+
+.input::placeholder {
+  color: var(--muted);
+  opacity: 1;
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 7rem;
+}
+
+.counter {
+  justify-self: end;
+  font-size: 0.875rem;
+}
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  cursor: pointer;
+  justify-self: start;
+}
+
+.toggle input {
+  width: 22px;
+  height: 22px;
+  accent-color: var(--primary);
+}
+
+.small {
+  display: grid;
+  gap: 6px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.submit {
+  display: grid;
+  gap: 8px;
+  justify-items: start;
+}
+
+.submit p {
+  min-height: 1.5em;
+}
+
+@media (min-width: 860px) {
+  .layout {
+    grid-template-columns: 280px 1fr;
+    align-items: start;
+    gap: 40px;
+  }
+
+  .intro {
+    position: sticky;
+    top: 24px;
+  }
+
+  .character {
+    width: 240px;
+  }
+}

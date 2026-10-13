@@ -1,0 +1,25 @@
+{
+  "summary": "You came across as friendly and prepared, and your example about the university data project was specific and easy to follow. Your answers lost some impact when they ran long: the result often arrived late or not at all. Tightening the ending of each answer is the quickest win.",
+  "overall": "solid",
+  "dimensions": [
+    { "label": "Structure", "level": "solid", "reason": "Most answers had a clear situation and action, but two ended without a result." },
+    { "label": "Relevance", "level": "strong", "reason": "You tied your examples back to the analyst role each time." },
+    { "label": "Conciseness", "level": "needs-work", "reason": "Several answers ran past a minute before reaching the main point." },
+    { "label": "Confidence", "level": "solid", "reason": "Steady pace overall, with some hedging at the start of answers." }
+  ],
+  "notes": [
+    { "id": "n1", "title": "Strong, specific project example", "body": "Your story about cleaning the survey data set named the tool you used, the size of the data and what you personally did. That level of detail makes an answer believable. Keep one or two more examples like it ready for other common questions.", "tags": ["strength"] },
+    { "id": "n2", "title": "Finish with the result", "body": "In the teamwork answer you described the conflict and what you did, then stopped. Add one sentence on what happened next: the deadline you hit, the feedback you got, or what changed in the team afterwards.", "tags": ["improve"] },
+    { "id": "n3", "title": "Lead with the headline", "body": "When asked why you want this role, you spent about forty seconds on background before giving a reason. Try answering in one sentence first, then support it with one example.", "tags": ["improve", "tip"] },
+    { "id": "n4", "title": "Swap filler for a pause", "body": "You said \"like\" and \"um\" most often at the start of answers. A silent two-second pause before you begin sounds more confident than a filler and gives you time to pick your first sentence.", "tags": ["tip"] },
+    { "id": "n5", "title": "Good questions back to the interviewer", "body": "Asking how the team measures success in the first six months showed real interest and gave you something to connect your experience to.", "tags": ["strength"] },
+    { "id": "n6", "title": "Use numbers where you can", "body": "You mentioned the dashboard \"saved a lot of time\". If you can say roughly how much, for example two hours a week, the claim becomes far more memorable.", "tags": ["tip"] }
+  ],
+  "stats": {
+    "userWords": 612,
+    "wpm": 148,
+    "fillerCount": 21,
+    "fillers": { "like": 9, "um": 6, "you know": 3, "basically": 2, "sort of": 1 },
+    "talkRatio": 0.68
+  }
+}

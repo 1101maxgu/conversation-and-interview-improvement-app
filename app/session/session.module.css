@@ -1,0 +1,427 @@
+/* The live session: one orb in the exact centre, everything else floats at the edges so nothing can move it. */
+.page {
+  /* The orb's box. The orb itself is 72% of it (the rest is room for its glow), so at most about 560px or 53vh. */
+  --box: min(778px, 74vh, 100vw);
+  --cy: 50%;
+  position: relative;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+.orb {
+  position: absolute;
+  left: 50%;
+  top: var(--cy);
+  width: var(--box);
+  transform: translate(-50%, -50%);
+}
+
+.top {
+  position: absolute;
+  inset: 0 0 auto;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 14px var(--gutter);
+}
+
+.title {
+  flex: 1;
+  min-width: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  color: var(--muted);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.timer {
+  font-variant-numeric: tabular-nums;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+.small {
+  min-height: 40px;
+  padding: 4px 16px;
+  font-size: 0.875rem;
+  box-shadow: none;
+}
+
+/* Right-aligned under End session (the top bar is about 68px tall). */
+.moreBtn {
+  position: absolute;
+  top: 62px;
+  right: var(--gutter);
+  z-index: 2;
+}
+
+.banners {
+  position: absolute;
+  top: 112px; /* below the top bar and the More button */
+  left: 50%;
+  z-index: 2;
+  display: grid;
+  gap: 8px;
+  width: min(560px, 100% - 2 * var(--gutter));
+  transform: translateX(-50%);
+  font-size: 0.9rem;
+}
+
+.banners .banner {
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+/* Status, captions and hints sit just under the orb's rim. */
+.under {
+  position: absolute;
+  inset-inline: 0;
+  top: calc(var(--cy) + var(--box) * 0.41);
+  display: grid;
+  justify-items: center;
+  gap: 4px;
+  padding-inline: var(--gutter);
+  text-align: center;
+  pointer-events: none;
+}
+
+.status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9375rem;
+  color: var(--muted);
+}
+
+/* The words carry the state; the dot's colour and shape are extra. */
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+}
+
+.status[data-state="listening"] .dot {
+  background: var(--ok);
+  animation: pulse 1.2s ease-in-out infinite;
+}
+
+.status[data-state="thinking"] .dot {
+  background: var(--warn);
+  border-radius: 2px;
+}
+
+.status[data-state="speaking"] .dot {
+  background: var(--accent);
+  border-radius: 2px;
+  width: 12px;
+  height: 6px;
+}
+
+.caption {
+  max-width: 44ch;
+  font-size: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hint,
+.hd {
+  font-size: 0.8125rem;
+}
+
+.hint[data-fade] {
+  animation: fade 0.5s ease-out 7s forwards;
+}
+
+/* ---- Bottom dock: More, the mic, Done ---- */
+
+.dock {
+  position: absolute;
+  left: 50%;
+  bottom: max(22px, env(safe-area-inset-bottom));
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 18px;
+  width: min(420px, 100% - 32px);
+  transform: translateX(-50%);
+}
+
+.side:first-child {
+  justify-self: end;
+}
+
+.side:last-child {
+  justify-self: start;
+}
+
+.start {
+  grid-column: 1 / -1;
+  justify-self: center;
+}
+
+.big {
+  min-height: 56px;
+  padding-inline: 28px;
+  font-size: 1.125rem;
+}
+
+.mic {
+  display: grid;
+  place-items: center;
+  width: 68px;
+  height: 68px;
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  transition:
+    background-color 150ms ease-out,
+    color 150ms ease-out,
+    transform 160ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.mic:active {
+  transform: scale(0.97);
+}
+
+.mic:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* The microphone is open and hearing you. */
+.mic[data-on="true"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-contrast);
+  animation: ring 1.6s ease-out infinite;
+}
+
+.typing {
+  position: absolute;
+  left: 50%;
+  bottom: 108px;
+  z-index: 2;
+  width: min(520px, 100% - 32px);
+  transform: translateX(-50%);
+}
+
+/* ---- More: a popover under its button at the top right, a bottom sheet on phones ---- */
+
+.more {
+  position: fixed;
+  inset: 112px var(--gutter) auto auto;
+  margin: 0;
+  width: min(380px, 100vw - 24px);
+  padding: 16px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--bg);
+  color: var(--text);
+  box-shadow: var(--shadow), 0 12px 32px rgba(0, 0, 0, 0.08);
+  gap: 14px;
+  opacity: 0;
+  transform: translateY(-8px);
+  transition:
+    opacity 180ms ease-out,
+    transform 180ms cubic-bezier(0.23, 1, 0.32, 1),
+    display 180ms allow-discrete,
+    overlay 180ms allow-discrete;
+}
+
+.more:popover-open {
+  display: grid;
+  opacity: 1;
+  transform: none;
+}
+
+@starting-style {
+  .more:popover-open {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+}
+
+.more::backdrop {
+  background: transparent;
+}
+
+.form {
+  display: flex;
+  gap: 8px;
+}
+
+.input {
+  flex: 1;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 16px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+
+.group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.volume {
+  display: inline-flex;
+  flex: 1;
+  align-items: center;
+  min-height: 40px;
+}
+
+.volume input {
+  width: 100%;
+  accent-color: var(--primary);
+}
+
+/* ---- Transcript ---- */
+
+/* While talking: a side panel on wide screens, a strip above the dock on narrow ones. */
+.panel {
+  position: absolute;
+  inset: auto 12px 108px;
+  z-index: 1;
+  height: 30vh;
+}
+
+@media (min-width: 1200px) {
+  .panel {
+    inset: 72px var(--gutter) 108px auto;
+    width: 320px;
+    height: auto;
+  }
+}
+
+/* On the end page. */
+.review {
+  width: min(680px, 100%);
+  height: min(60vh, 520px);
+  text-align: left;
+}
+
+.transcript {
+  height: 100%;
+  overflow-y: auto;
+  padding: 12px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  overscroll-behavior: contain;
+}
+
+.list {
+  display: grid;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list:empty {
+  display: none;
+}
+
+.list + .list {
+  margin-top: 10px;
+}
+
+.msg {
+  display: grid;
+  gap: 2px;
+  overflow-wrap: anywhere;
+}
+
+.who {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.msg[data-role="user"] {
+  padding-left: 12px;
+  border-left: 4px solid var(--accent);
+}
+
+.msg[data-interim] {
+  font-style: italic;
+  color: var(--muted);
+  border-left-style: dashed;
+}
+
+.msg[data-error] {
+  color: var(--muted);
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.85rem;
+}
+
+/* Phones: the orb sits a little above centre, in the space between the top bar and the dock. */
+@media (max-width: 700px) {
+  .page {
+    --cy: 44%;
+  }
+
+  .more {
+    inset: auto 0 0;
+    margin: 0 auto;
+    width: 100%;
+    max-width: none;
+    padding-bottom: max(20px, env(safe-area-inset-bottom));
+    border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  }
+}
+
+@keyframes pulse {
+  50% {
+    transform: scale(1.5);
+    opacity: 0.6;
+  }
+}
+
+@keyframes fade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes ring {
+  from {
+    box-shadow: 0 0 0 0 rgba(10, 10, 10, 0.28);
+  }
+  to {
+    box-shadow: 0 0 0 16px rgba(10, 10, 10, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dot,
+  .mic {
+    animation: none !important;
+  }
+}

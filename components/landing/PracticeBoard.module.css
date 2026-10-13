@@ -1,0 +1,82 @@
+/* Six tiles on a straight grid: flat earthy colours. */
+.board {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  padding: 18px 6px 26px;
+  list-style: none;
+}
+
+.tile {
+  --tone: #e6e1d9;
+  display: grid;
+  align-content: end;
+  gap: 2px;
+  aspect-ratio: 1 / 1.15;
+  padding: 16px;
+  border-radius: 22px;
+  background: var(--tone);
+  color: #1d1b19;
+}
+
+.icon {
+  display: block;
+  margin-bottom: auto;
+}
+
+.label {
+  font-weight: 600;
+  font-size: 0.9375rem;
+  letter-spacing: -0.01em;
+}
+
+.note {
+  color: rgba(29, 27, 25, 0.62);
+  font-size: 0.8125rem;
+}
+
+.tile:nth-child(1) {
+  --tone: #dfe7d6;
+}
+.tile:nth-child(2) {
+  --tone: #f1d9c9;
+}
+.tile:nth-child(3) {
+  --tone: #d6e4ee;
+}
+.tile:nth-child(4) {
+  --tone: #f4e7b8;
+}
+.tile:nth-child(5) {
+  --tone: #efd3d6;
+}
+.tile:nth-child(6) {
+  --tone: #e3dff0;
+}
+
+@media (min-width: 900px) {
+  .board {
+    gap: 18px;
+    padding: 28px 12px 36px;
+  }
+  .tile {
+    padding: 20px;
+  }
+}
+
+/* Phones: tighter tiles so "Conversation" fits on one line. */
+@media (max-width: 520px) {
+  .tile {
+    padding: 12px;
+  }
+  .icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  .label {
+    font-size: 0.8125rem;
+  }
+  .note {
+    font-size: 0.75rem;
+  }
+}

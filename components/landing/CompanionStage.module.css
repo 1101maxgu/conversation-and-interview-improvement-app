@@ -1,0 +1,174 @@
+/* Cast list on one side, the chosen companion alive on the other. */
+.panel {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-lg);
+  background: var(--surface);
+}
+
+.cast {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 4px;
+  list-style: none;
+}
+
+.row {
+  display: grid;
+  grid-template-columns: auto 44px minmax(0, 1fr);
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 56px;
+  padding: 6px 14px;
+  border: 0;
+  border-radius: 16px;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .row:hover {
+    background: var(--tint);
+  }
+}
+
+.row[aria-current="true"] {
+  background: var(--bg);
+  box-shadow: var(--shadow);
+}
+
+.num {
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+.mini {
+  display: block;
+  width: 44px;
+  opacity: 0.75;
+  transition: opacity 0.2s ease;
+}
+
+.row[aria-current="true"] .mini {
+  opacity: 1;
+}
+
+.text {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.name {
+  font-weight: 500;
+}
+
+/* Phones show names only: the blurbs would make the list taller than the screen. */
+.blurb {
+  display: none;
+  color: var(--muted);
+  font-size: 0.875rem;
+  line-height: 1.4;
+}
+
+.rowSkeleton {
+  height: 64px;
+  border-radius: 16px;
+}
+
+.stage {
+  order: -1;
+  display: grid;
+  justify-items: center;
+  align-content: center;
+  gap: 18px;
+  padding: 20px 12px 24px;
+  text-align: center;
+}
+
+.orb {
+  width: min(340px, 78%);
+}
+
+.orbSkeleton {
+  aspect-ratio: 1;
+  border-radius: 50%;
+}
+
+.say {
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  min-height: 7rem;
+}
+
+.turn {
+  padding: 2px 12px;
+  border: 1px solid var(--border);
+  border-radius: 9999px;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.turn[data-turn="you"] {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: var(--primary-contrast);
+}
+
+.line {
+  max-width: 26ch;
+  font-size: 1.25rem;
+  line-height: 1.35;
+  text-wrap: balance;
+  transition: opacity 0.4s ease;
+}
+
+.line[data-dim="true"] {
+  opacity: 0.4;
+}
+
+/* Wide screens: the cast runs down the left with its blurbs, the stage takes the rest. */
+@media (min-width: 900px) {
+  .panel {
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: 16px;
+    padding: 20px;
+  }
+  .cast {
+    align-content: center;
+    gap: 6px;
+  }
+  .row {
+    min-height: 64px;
+    padding-block: 10px;
+  }
+  .blurb {
+    display: block;
+  }
+  .stage {
+    order: 0;
+    padding: 32px 24px;
+    border-radius: 20px;
+    background: var(--bg);
+  }
+  .orb {
+    width: min(380px, 70%);
+  }
+  .line {
+    font-size: 1.5rem;
+  }
+}
